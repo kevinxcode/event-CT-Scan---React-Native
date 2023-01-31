@@ -14,6 +14,9 @@ export default function ListScreen(){
     const getData = () => {
         AsyncStorage.getItem(keyAsync).then(JSON.parse).then(value => 
           {  
+          if (value == null) {
+              navigation.replace("HOME");
+          }
           setValue(value);
         })
       }
