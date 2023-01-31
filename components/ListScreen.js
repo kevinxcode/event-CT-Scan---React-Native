@@ -15,6 +15,7 @@ export default function ListScreen(){
         AsyncStorage.getItem(keyAsync).then(JSON.parse).then(value => 
           {  
           if (value == null) {
+            alert('No Data List');
               navigation.replace("HOME");
           }
           setValue(value);
