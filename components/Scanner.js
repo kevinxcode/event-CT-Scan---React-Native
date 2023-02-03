@@ -6,6 +6,7 @@ export default function App({ navigation, route }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const apiCode = route.params.paramKey;
+  const titleName = route.params.paramName;
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -21,7 +22,7 @@ export default function App({ navigation, route }) {
     // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     console.log(data);
     navigation.replace("RESULT", {
-    paramCode: data, paramKey: apiCode
+    paramCode: data, paramKey: apiCode, paramName: titleName
     })
   };
 
@@ -37,11 +38,18 @@ export default function App({ navigation, route }) {
   }
 
   return (
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={[StyleSheet.absoluteFill, styles.container]}>
-      {scanned && <Button title={'Tap to Scan Again'} onPress={() => newScan()} />}
-      </BarCodeScanner>
+      <View style={styles.container}>
+        <View style={{height: 30, width: '100%', marginTop: 10, marginBottom: 10, alignItems: 'center', justifyContent: 'center'}}>
+          <Text style={{fontWeight: 'bold'}}>{route.params.paramName}</Text>
+        </View>
+      
+          <BarCodeScanner
+            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+            style={[ styles.container]}>
+          {scanned && <Button title={'Tap to Scan Again'} onPress={() => newScan()} />}
+          </BarCodeScanner>
+      
+      </View>
   );
 }
 
