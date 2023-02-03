@@ -1,28 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { View,StyleSheet,Text, TouchableOpacity } from "react-native";
+import { View,StyleSheet,Text, TouchableOpacity, FlatList } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
 
 export default function ListScreen(){
     const navigation = useNavigation();
-    const [value, setValue] = useState([]);
+    const [dataList, setDataList] = useState([]);
     const keyAsync = 'listData'; // name async
     useEffect(() => {
         getData();
       }, []);
+      
       const getData = () => {
         AsyncStorage.getItem(keyAsync).then(JSON.parse).then(value => 
           {  
           if (value == null) {
-            alert('No Data List');
+              alert('No Data List');
               navigation.replace("HOME");
           }
-          setValue(value);
+          setDataList(value);
         })
       }
     return(
         <View style={styles.container}>
+          <FlatList
+                data={dataList}
+                keyExtractor={({ token }, index) => token}
+                renderItem={({ item }) => (
+                    <View style={{marginBottom: 15,width: '100%', height: 60, borderRadius: 15, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center'}}>
+                         <Text style={{fontWeight: 'bold', fontSize: 16, marginBottom:3}}>{item.title}</Text>
+                         <Text style={{fontSize: 11}}>{item.loc}</Text>
+                    </View>
+               
+                )}
+            />
            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Scanner", {paramKey: value.api_value})}>
             <Text style={{fontWeight: 'bold'}}>{value.title}</Text>
            </TouchableOpacity>

@@ -64,8 +64,6 @@ export default function Home() {
     //   navigation.replace('HOME');
     }
 
-
-
     //  const checkApi = () =>{
     //     const greetingToSave = {
     //         title: apiTitle,
