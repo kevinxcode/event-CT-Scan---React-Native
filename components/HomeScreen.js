@@ -22,14 +22,23 @@ export default function Home() {
         AsyncStorage.getItem(keyAsync).then(JSON.parse).then(value => 
           {  
           if (value == null) {
-            alert('No Data List');
+            // alert('No Data List');
           }
           setDataList(value);
         })
       }
     //  end get
+    // remove 
+    const removeList = async () => {
+        try {
+          await AsyncStorage.clear();
+          navigation.replace('HOME');
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      // remove
 
-    const [isLoading, setLoading] = useState(true);
     const [dataList, setDataList] = useState([]);
 
     // storage
@@ -43,7 +52,7 @@ export default function Home() {
         .then((response) => response.json())
         .then((json) => {
             setData(JSON.stringify(json));
-            alert('Success');
+            // alert('Success');
         })
         .catch((error) => {
           if(error){
@@ -51,7 +60,11 @@ export default function Home() {
           }
         })
       //   .finally(() => setLoading(false));
+      getData();
+    //   navigation.replace('HOME');
     }
+
+
 
     //  const checkApi = () =>{
     //     const greetingToSave = {
@@ -64,11 +77,17 @@ export default function Home() {
     //  }
     return(
         <View style={styles.container}>
-            <View></View>
+           
             <Text style={{marginBottom: 15}}>LIST EVENT</Text>
-            <TouchableOpacity style={{backgroundColor: 'red', marginBottom: 20,}} onPress={getList}>
-                <Text>REFRESH</Text>
-            </TouchableOpacity>
+            <View style={{flexDirection: 'row',}}>
+                <TouchableOpacity style={{backgroundColor: 'blue', marginBottom: 20, marginRight: 80}} onPress={getList}>
+                    <Text>REFRESH</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{backgroundColor: 'red', marginBottom: 20,}} onPress={removeList}>
+                    <Text>CELAR</Text>
+                </TouchableOpacity>
+            </View>
+            
             
             <View style={{ flex: 3, width: '100%'}}>
                 
@@ -89,27 +108,6 @@ export default function Home() {
                     <Text>SCAN EVENT HOME</Text>
                 </TouchableOpacity>
             </View>
-            
-            
-            {/* <Text>PLEASE INPUT API CODE</Text>
-            <TextInput 
-                onChangeText={(apiTitle) => setApiTitle(apiTitle)} 
-                value={apiTitle}  
-                style={styles.textInput} 
-                placeholder={'Title'} />
-
-            <TextInput 
-                onChangeText={(apiText) => setApiText(apiText)} 
-                value={apiText}  
-                style={styles.textInput} 
-                placeholder={'Api Code'} />
-           
-            <TouchableOpacity style={styles.button} onPress={checkApi}>
-                <Text>SAVE</Text>
-            </TouchableOpacity> */}
-
-            
-
           
         </View>
     );
