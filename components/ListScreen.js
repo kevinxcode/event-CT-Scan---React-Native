@@ -11,7 +11,7 @@ export default function ListScreen(){
     useEffect(() => {
         getData();
       }, []);
-    const getData = () => {
+      const getData = () => {
         AsyncStorage.getItem(keyAsync).then(JSON.parse).then(value => 
           {  
           if (value == null) {
