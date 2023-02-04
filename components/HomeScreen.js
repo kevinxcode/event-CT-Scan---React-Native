@@ -48,7 +48,7 @@ export default function Home() {
     // end storage
 
     const getList = () =>{
-        fetch("https://raw.githubusercontent.com/kevinxcode/JSON-Example/main/JsonEventList.json")
+        fetch("https://hrd.citratubindo.com/hr_program/event/app/apiList")
         .then((response) => response.json())
         .then((json) => {
             setData(JSON.stringify(json));
@@ -66,7 +66,6 @@ export default function Home() {
 
     return(
         <View style={styles.container}>
-           
             <Text style={{marginBottom: 15}}>LIST EVENT</Text>
             <View style={{flexDirection: 'row',}}>
                 <TouchableOpacity style={{backgroundColor: 'blue', marginBottom: 20, marginRight: 80}} onPress={getList}>
