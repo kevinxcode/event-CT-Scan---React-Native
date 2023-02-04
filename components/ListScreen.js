@@ -70,8 +70,8 @@ export default function ListScreen(){
                     <ScrollView>
                     <TouchableOpacity  onPress={() => navigation.navigate("Scanner", {paramKey: item.token, paramName: item.title})}>
                     <View style={{marginBottom: 15,width: '100%', height: 60, borderRadius: 15, backgroundColor: 'blue', alignItems: 'center', justifyContent: 'center'}}>
-                         <Text style={{fontWeight: 'bold', fontSize: 16, marginBottom:3}}>{item.title}</Text>
-                         <Text style={{fontSize: 11}}>{item.loc}</Text>
+                         <Text style={{fontWeight: 'bold', fontSize: 16, marginBottom:3, color: '#fff'}}>{item.title}</Text>
+                         <Text style={{fontSize: 11, color: '#fff'}}>{item.loc}</Text>
                     </View>
                     </TouchableOpacity>
                     </ScrollView>

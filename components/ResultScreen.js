@@ -71,11 +71,11 @@ export default function ResultScreen({route}){
         <Text style={{marginTop: 10}}>{chkCon}</Text>
 
         <TouchableOpacity onPress={() => navigation.navigate("Scanner", {paramKey: dataKey, paramName: route.params.paramName})} style={styles.button}>
-            <Text> SCAN AGAIN</Text>
+            <Text style={{color: '#fff'}}> SCAN AGAIN</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={stopInterval} style={{backgroundColor: '#fff', marginTop: 18}}>
-            <Text>you will automatically redirect 5 Second</Text>
+            <Text >you will automatically redirect 5 Second</Text>
         </TouchableOpacity>
 
 

@@ -84,11 +84,11 @@ export default function App({ navigation, route }) {
          
          <View style={styles.layerTop} >
           <View style={{width: '80%', height: 30,  flexDirection: 'row',  alignItems:'center',}}>
-            <TouchableOpacity onPress={frontCamera} style={{height: 30, marginHorizontal: 5, backgroundColor: 'grey'}}>
-              <Text>FRONT</Text>
+            <TouchableOpacity onPress={frontCamera} style={{height: 30, marginHorizontal: 5, backgroundColor: 'blue'}}>
+              <Text style={{color: '#fff'}}>FRONT</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={backCamera} style={{height: 30, marginHorizontal: 5, backgroundColor: 'grey'}}>
-              <Text>BACK</Text>
+            <TouchableOpacity onPress={backCamera} style={{height: 30, marginHorizontal: 5, backgroundColor: 'blue'}}>
+              <Text style={{color: '#fff'}}>BACK</Text>
             </TouchableOpacity>
             
           </View>
@@ -101,7 +101,7 @@ export default function App({ navigation, route }) {
          </View>
        
          <TouchableOpacity onPress={() => navigation.navigate("LIST_PAGE")} style={{height: 40, marginBottom: 8, backgroundColor: 'blue', justifyContent: 'center', alignItems: 'center'}}>
-              <Text>BACK TO DASHBOARD</Text>
+              <Text style={{color: '#fff'}}>BACK TO DASHBOARD</Text>
             </TouchableOpacity>
           </BarCodeScanner>
 
