@@ -8,7 +8,7 @@ export default function Home() {
      
     //  asyn storage
      const keyAsync = 'listData'; // name async
-     const setData = async jsonValue => {
+    const setData = async jsonValue => {
         try {
             await AsyncStorage.setItem(keyAsync, jsonValue);
             // navigation.navigate('Home');
@@ -64,15 +64,6 @@ export default function Home() {
     //   navigation.replace('HOME');
     }
 
-    //  const checkApi = () =>{
-    //     const greetingToSave = {
-    //         title: apiTitle,
-    //         api_value: apiText
-    //       };
-    //       setData(JSON.stringify(greetingToSave));
-        
-    //       alert('success Please go to dashboard');
-    //  }
     return(
         <View style={styles.container}>
            

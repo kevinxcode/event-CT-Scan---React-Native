@@ -25,18 +25,22 @@ export default function App() {
       <Stack.Screen name="HOME" component={HomeScreen} 
          options={{
           headerShown: false,
+          headerBackVisible: false,
         }} />
         <Stack.Screen name="LIST_PAGE" component={ListScreen} 
          options={{
           headerShown: false,
+          headerBackVisible: false,
         }} />
         <Stack.Screen name="Scanner" component={ScanScreen}
         options={{
           title: 'Scan Activity',
+          headerBackVisible: false,
         }} />
         <Stack.Screen name="RESULT" component={ResultScreen}
         options={{
           title: 'Result',
+          headerBackVisible: false,
         }} />
       </Stack.Navigator>
       </NavigationContainer>

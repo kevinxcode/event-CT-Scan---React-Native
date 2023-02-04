@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, FlatList, TouchableOpacity } from "react-native
 import { useNavigation } from '@react-navigation/native';
 
 export default function ResultScreen({route}){
+  const [chkCon, setChkCon] = useState('');
     const navigation = useNavigation();
     const [isLoading, setLoading] = useState(false);
     const [data, setData] = useState([]);
@@ -13,35 +14,45 @@ export default function ResultScreen({route}){
     const dataUrl = `https://hrd.citratubindo.com/hr_program/event/app/apiQR?link_code=${dataKey}&&qr_scan=${dataCode}`;
 
     useEffect(() => {
-        console.log(dataUrl)
-        fetch(dataUrl)
-          .then((response) => response.json())
-          .then((json) => {
-            if(json.msgCode=='success'){
-                setData(json.details)
-                setLoading(true)
-            }else{
-                setLoading(false)
-            }
-            setDataTitle(json)
-          })
-          .catch((error) => {
-            if(error){
-                alert('Network Error');
-            }
-          })
-        //   .finally(() => setLoading(false));
+      parseScan();
       }, []);
+      const refreshIntervalId  = setInterval(() => {
+        console.log('result')
+        navigation.navigate("Scanner", {paramKey: dataKey, paramName: route.params.paramName})
+        clearInterval(refreshIntervalId)
+      }, 5500);
 
-    const Spinner = () => (
-        <View style={styles.activityContainer}>
-          <Text>Loading..</Text>
-          <ActivityIndicator size="large" color={'#5040ff'} />
-        </View>
-    );
+      const stopInterval = () => {
+        clearInterval(refreshIntervalId)
+      }
 
+      const parseScan = () => {
+        console.log(dataUrl)
+          fetch(dataUrl)
+            .then((response) => response.json())
+            .then((json) => {
+              if(json.msgCode=='success'){
+                  setData(json.details)
+                  setLoading(true)
+                  setChkCon('');
+              }else{
+                  setLoading(false)
+                  setChkCon('Network Error');
+              }
+              setDataTitle(json)
+            })
+            .catch((error) => {
+              if(error){
+                  // alert('Network Error');
+                  setChkCon('Network Error');
+              }
+            })
+     }
+
+   
     return(
-      <View style={styles.container}  renderLoading={Spinner}>
+      <View style={styles.container}>
+        <Text style={{marginBottom: 15}}>{route.params.paramName}</Text>
 
         <View style={{width: '100%', borderBottomWidth: 2, height: 50, marginBottom: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff'}}>
              <Text style={{fontWeight: 'bold', fontSize: 18}} >{dataTitle.msgCode}</Text>
@@ -57,8 +68,14 @@ export default function ResultScreen({route}){
             <Text style={{fontWeight: 'bold', fontSize: 20, color: 'red'}}>{dataTitle.msgCode}</Text>
         )}
 
-        <TouchableOpacity onPress={() => navigation.navigate("Scanner", {paramKey: dataKey})} style={styles.button}>
+        <Text style={{marginTop: 10}}>{chkCon}</Text>
+
+        <TouchableOpacity onPress={() => navigation.navigate("Scanner", {paramKey: dataKey, paramName: route.params.paramName})} style={styles.button}>
             <Text> SCAN AGAIN</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={stopInterval} style={{backgroundColor: '#fff', marginTop: 18}}>
+            <Text>you will automatically redirect 5 Second</Text>
         </TouchableOpacity>
 
 

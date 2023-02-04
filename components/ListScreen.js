@@ -1,30 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import { View,StyleSheet,Text, TouchableOpacity, FlatList, ScrollView } from "react-native";
+import { View,StyleSheet,Text, TouchableOpacity, FlatList, ScrollView, ActivityIndicator } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
 
 export default function ListScreen(){
     const [chkCon, setChkCon] = useState('');
-    const unsubscribe = useState(
-        fetch("https://hrd.citratubindo.com/ldap/api")
+    //   loader
+    const [loaderVisible, setLoaderVisible] = useState(false);
+      const ActivityIndicatorElement  = () => (
+        <View style={styles.activityContainer}>
+          <ActivityIndicator size="large" color={'#5040ff'} />
+        </View>
+    );
+    //  end loader 
+    //  check connection
+    const dataURL = "https://hrd.citratubindo.com/ldap/api";
+    // const dataURL = "https://raw.githubusercontent.com/kevinxcode/JSON-Example/main/jsonPing.json";
+     useState (
+        fetch(dataURL)
         .then((response) => response.json())
         .then((json) => {
-            setChkCon('Connection Success')
+            if(json.msg=='ok'){
+                setLoaderVisible(false)
+                setChkCon('Connection Success')
+            }else{
+                setLoaderVisible(true)
+                setChkCon('Connection Error')
+            }
         })
         .catch((error) => {
           if(error){
              setChkCon('Connection Error')
+             setLoaderVisible(true)
           }
         })
     )
+    // end check connection
     const navigation = useNavigation();
     const [dataList, setDataList] = useState([]);
     const keyAsync = 'listData'; // name async
     useEffect(() => {
         getData();
       }, []);
-      
+
       const getData = () => {
         AsyncStorage.getItem(keyAsync).then(JSON.parse).then(value => 
           {  
@@ -35,11 +54,14 @@ export default function ListScreen(){
           setDataList(value);
         })
       }
+
+
       
     return(
-        <View style={styles.container}>
-            <Text style={{marginBottom: 15}}>LIST EVENT</Text>
-       
+        <View style={styles.container} 
+       >
+         
+        <Text style={{marginBottom: 15}}>LIST EVENT</Text>
         <View style={{ flex: 1, width: '100%', justifyContent: 'center'}}>
           <FlatList
                 data={dataList}
@@ -57,6 +79,7 @@ export default function ListScreen(){
                 )}
             />
         </View>
+        {loaderVisible ? <ActivityIndicatorElement /> : null}
         <Text style={{marginBottom: 50}}>{chkCon}</Text>
            
         </View>
