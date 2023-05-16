@@ -7,7 +7,7 @@ export default function Home() {
      const navigation = useNavigation();
      
     //  asyn storage
-     const keyAsync = 'listData'; // name async
+    const keyAsync = 'listData'; // name async
     const setData = async jsonValue => {
         try {
             await AsyncStorage.setItem(keyAsync, jsonValue);
