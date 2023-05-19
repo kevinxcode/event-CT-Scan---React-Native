@@ -24,7 +24,7 @@ export default function LoginScreen() {
           alert(responseJson.details);
         } else {
           const loginArray = username;
-          console.log(loginArray);
+
           setData(loginArray);
           navigation.replace("LandingPage");
         }
