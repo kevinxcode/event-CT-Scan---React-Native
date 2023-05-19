@@ -20,7 +20,6 @@ export default function LoginScreen() {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        alert(responseJson);
         if (responseJson.loginCodes == "error") {
           alert(responseJson.details);
         } else {
