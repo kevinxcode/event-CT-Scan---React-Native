@@ -1,9 +1,9 @@
 {
-  "hostType": "lan",
+  "hostType": "tunnel",
   "lanType": "ip",
   "dev": true,
   "minify": false,
-  "urlRandomness": null,
+  "urlRandomness": "KPO37PE",
   "https": false,
   "scheme": "com.kevinalnizar.eventscan",
   "devClient": false
