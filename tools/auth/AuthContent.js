@@ -85,9 +85,7 @@ function AuthContent({ onAuthenticate }) {
               <Text style={styles.headerText}>CITRA TUBINDO TBK</Text>
             </View>
           </View>
-          <View style={styles.titleContainer}>
-            <TitleText>{"Title"}</TitleText>
-          </View>
+          
           <ScrollView style={styles.scrollMenu}>
             <View style={styles.titleContent}>
               <Text style={styles.textContent1}>Proceed with your</Text>
@@ -140,7 +138,7 @@ const styles = StyleSheet.create({
     color: "#0001C0",
   },
   scrollMenu: {
-    paddingTop: deviceHeight < 710 ? 30 : 100,
+    paddingTop: deviceHeight < 710 ? 25 : 80,
   },
   logoImage: {
     width: "100%",
