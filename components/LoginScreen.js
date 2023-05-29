@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
 import AuthContent from "../tools/auth/AuthContent";
 import LoadingOverlay from "../tools/ui/LoadingOverlay";
+import { useNavigation } from "@react-navigation/native";
 
 export default function LoginScreen() {
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
   const navigation = useNavigation();
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
+
   const APIURL = `https://hrd.citratubindo.com/ldap/login/zimbra_native`;
   const authenticate = ({ username, password }) => {
     setIsAuthenticating(true);
@@ -20,13 +21,14 @@ export default function LoginScreen() {
     })
       .then((response) => response.json())
       .then((responseJson) => {
+        alert(responseJson);
         if (responseJson.loginCodes == "error") {
           alert(responseJson.details);
         } else {
           const loginArray = username;
-
+          console.log(loginArray);
           setData(loginArray);
-          navigation.replace("LandingPage");
+          navigation.navigate("LandingPage");
         }
         setIsAuthenticating(false);
       })
@@ -45,13 +47,15 @@ export default function LoginScreen() {
     try {
       AsyncStorage.getItem(asyncKey).then((value) => {
         if (value != null) {
-          navigation.replace("LandingPage");
+          navigation.replace("HOME");
+        }else{
+          navigation.replace("Login");
         }
         setValue(value);
       });
     } catch (error) {
       console.log(err);
-      navigation.replace("Login");
+      navigation.navigate("Login");
     }
   };
 

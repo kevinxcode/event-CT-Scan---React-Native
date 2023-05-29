@@ -16,7 +16,6 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
 import AuthForm from "./AuthForm";
-import TitleText from "../ui/TitleText";
 
 function AuthContent({ onAuthenticate }) {
   const navigation = useNavigation();
