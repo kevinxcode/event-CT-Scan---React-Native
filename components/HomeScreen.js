@@ -10,9 +10,8 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function Home() {
+export default function HomeScreen({ navigation }) {
   const [username, setUsername] = useState();
-  const navigation = useNavigation();
   const asyncKey = "userData";
   //  asyn storage
   const keyAsync = "listData"; // name async
@@ -31,8 +30,7 @@ export default function Home() {
     AsyncStorage.getItem(keyAsync)
       .then(JSON.parse)
       .then((value) => {
-        if (value == null) {
-          // alert("No Data List");
+        if (value != null) {
         }
         setDataList(value);
       });
@@ -77,7 +75,6 @@ export default function Home() {
 
   const getList = () => {
     // fetch("https://hrd.citratubindo.com/hr_program/event/app/apiList")
-    getData();
     fetch(
       `https://hrd.citratubindo.com/hr_program/event/api/event_list?nik=${username}`
     )

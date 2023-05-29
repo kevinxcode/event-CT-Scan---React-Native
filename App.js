@@ -1,9 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createStackNavigator } from "@react-navigation/stack";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import HomeScreen from "./components/HomeScreen";
 import LoginScreen from "./components/LoginScreen";
 import ListScreen from "./components/ListScreen";
@@ -13,83 +15,31 @@ import AnimatedSplash from "react-native-animated-splash-screen";
 
 const Stack = createStackNavigator();
 
-function AuthStack() {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-        contentStyle: { backgroundColor: "white" },
-      }}
-    >
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="LandingPage" component={AuthenticatedStack} />
-    </Stack.Navigator>
-  );
-}
-
-function AuthenticatedStack() {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerTintColor: "white",
-        headerStyle: { backgroundColor: "#025ef2" },
-        headerLeft: null,
-        headerBackButtonMenuEnabled: {
-          onChangeText: (event) => setSearch(event.nativeEvent.text),
-        },
-      }}
-    >
-      <Stack.Screen
-        name="HOME"
-        component={HomeScreen}
-        options={{
-          headerShown: false,
-          headerBackVisible: false,
-        }}
-      />
-      <Stack.Screen
-        name="LIST_PAGE"
-        component={ListScreen}
-        options={{
-          headerShown: false,
-          headerBackVisible: false,
-        }}
-      />
-      <Stack.Screen
-        name="Scanner"
-        component={ScanScreen}
-        options={{
-          title: "Scan Activity",
-          headerBackVisible: false,
-        }}
-      />
-      <Stack.Screen
-        name="RESULT"
-        component={ResultScreen}
-        options={{
-          title: "Result",
-          headerBackVisible: false,
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-
-function Navigation() {
-  return (
-    <NavigationContainer style={styles.rootScreen}>
-      <StatusBar style="dark" />
-      <AuthStack />
-    </NavigationContainer>
-  );
-}
-
 export default function App() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const asyncKey = "userData";
+  const [value, setValue] = useState();
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const getData = () => {
+    try {
+      AsyncStorage.getItem(asyncKey).then((value) => {
+        if (value != null) {
+          alert(value);
+          setLoggedIn(true);
+        }
+        setValue(value);
+      });
+    } catch (error) {
+      console.log(error);
+      setLoggedIn(false);
+    }
+  };
 
   useEffect(() => {
     setTimeout(() => {
       setIsLoaded(true);
+      getData();
     }, 1800);
   }, []);
 
@@ -102,7 +52,79 @@ export default function App() {
       logoHeight={600}
       logoWidth={300}
     >
-      <Navigation />
+      <NavigationContainer style={styles.rootScreen}>
+        <StatusBar style="dark" />
+        <Stack.Navigator
+          screenOptions={{
+            headerTintColor: "white",
+            headerStyle: { backgroundColor: "#025ef2" },
+            headerLeft: null,
+            headerBackButtonMenuEnabled: {
+              onChangeText: (event) => setSearch(event.nativeEvent.text),
+            },
+          }}
+        >
+          {loggedIn ? (
+            <Stack.Screen
+              name="Authenticated"
+              component={HomeScreen}
+              options={{
+                headerShown: false,
+                headerBackVisible: false,
+              }}
+            />
+          ) : (
+            <Stack.Screen
+              name="Auth"
+              component={LoginScreen}
+              options={{
+                headerShown: false,
+                headerBackVisible: false,
+              }}
+            />
+          )}
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{
+              headerShown: false,
+              headerBackVisible: false,
+            }}
+          />
+          <Stack.Screen
+            name="HOME"
+            component={HomeScreen}
+            options={{
+              headerShown: false,
+              headerBackVisible: false,
+            }}
+          />
+          <Stack.Screen
+            name="LIST_PAGE"
+            component={ListScreen}
+            options={{
+              headerShown: false,
+              headerBackVisible: false,
+            }}
+          />
+          <Stack.Screen
+            name="Scanner"
+            component={ScanScreen}
+            options={{
+              title: "Scan Activity",
+              headerBackVisible: false,
+            }}
+          />
+          <Stack.Screen
+            name="RESULT"
+            component={ResultScreen}
+            options={{
+              title: "Result",
+              headerBackVisible: false,
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </AnimatedSplash>
   );
 }

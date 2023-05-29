@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthContent from "../tools/auth/AuthContent";
 import LoadingOverlay from "../tools/ui/LoadingOverlay";
 
 export default function LoginScreen({ navigation }) {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
+  // const navigation = useNavigation();
 
-  const APIURL = `https://api.fadeintech.com/api/reactlogin`;
-  // const APIURL = `https://hrd.citratubindo.com/ldap/login/zimbra_native`;
+  const APIURL = `https://hrd.citratubindo.com/ldap/login/zimbra_native`;
   const authenticate = ({ username, password }) => {
     setIsAuthenticating(true);
     fetch(APIURL, {
@@ -20,14 +20,13 @@ export default function LoginScreen({ navigation }) {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-       
         if (responseJson.loginCodes == "error") {
           alert(responseJson.details);
         } else {
           const loginArray = username;
           console.log(loginArray);
           setData(loginArray);
-          navigation.navigate("LandingPage");
+          navigation.replace("HOME");
         }
         setIsAuthenticating(false);
       })
@@ -38,22 +37,13 @@ export default function LoginScreen({ navigation }) {
 
   const [value, setValue] = useState();
   const asyncKey = "userData";
-  useEffect(() => {
-    getData();
-  }, []);
 
-  const getData = () => {
-    try {
-      AsyncStorage.getItem(asyncKey).then((value) => {
-        if (value != null) {
-          navigation.navigate("LandingPage");
-        }
-        setValue(value);
-      });
-    } catch (error) {
-      console.log(err);
-      navigation.navigate("Login");
+  const backAction = () => {
+    if (value != null) {
+      navigation.replace("HOME");
+    } else {
     }
+    return true;
   };
 
   const setData = async (dataJson) => {
