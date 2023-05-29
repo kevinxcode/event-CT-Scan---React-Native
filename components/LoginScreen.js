@@ -1,12 +1,18 @@
-import { useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthContent from "../tools/auth/AuthContent";
 import LoadingOverlay from "../tools/ui/LoadingOverlay";
 import { useNavigation } from "@react-navigation/native";
 
+<<<<<<< HEAD
 export default function LoginScreen() {
   const navigation = useNavigation();
   const [isAuthenticating, setIsAuthenticating] = useState(false);
+=======
+export default function LoginScreen({ navigation }) {
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
+  // const navigation = useNavigation();
+>>>>>>> f0695c2161b4b6db4dc46d86e6bbd90856b0d37b
 
   const APIURL = `https://hrd.citratubindo.com/ldap/login/zimbra_native`;
   const authenticate = ({ username, password }) => {
@@ -28,7 +34,11 @@ export default function LoginScreen() {
           const loginArray = username;
           console.log(loginArray);
           setData(loginArray);
+<<<<<<< HEAD
           navigation.navigate("LandingPage");
+=======
+          navigation.replace("HOME");
+>>>>>>> f0695c2161b4b6db4dc46d86e6bbd90856b0d37b
         }
         setIsAuthenticating(false);
       })
@@ -39,10 +49,8 @@ export default function LoginScreen() {
 
   const [value, setValue] = useState();
   const asyncKey = "userData";
-  useEffect(() => {
-    getData();
-  }, []);
 
+<<<<<<< HEAD
   const getData = () => {
     try {
       AsyncStorage.getItem(asyncKey).then((value) => {
@@ -56,7 +64,14 @@ export default function LoginScreen() {
     } catch (error) {
       console.log(err);
       navigation.navigate("Login");
+=======
+  const backAction = () => {
+    if (value != null) {
+      navigation.replace("HOME");
+    } else {
+>>>>>>> f0695c2161b4b6db4dc46d86e6bbd90856b0d37b
     }
+    return true;
   };
 
   const setData = async (dataJson) => {
