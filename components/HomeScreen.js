@@ -30,13 +30,14 @@ export default function HomeScreen({ navigation }) {
     AsyncStorage.getItem(keyAsync)
       .then(JSON.parse)
       .then((value) => {
-        if (value != null) {
+        if (value == null) {
+          alert("No Data List");
         }
         setDataList(value);
       });
     AsyncStorage.getItem(asyncKey).then((value2) => {
       if (value2 == null) {
-        alert("No Data Listss");
+        alert("User not found");
       }
       setUsername(value2);
     });

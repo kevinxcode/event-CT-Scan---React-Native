@@ -25,7 +25,6 @@ export default function App() {
     try {
       AsyncStorage.getItem(asyncKey).then((value) => {
         if (value != null) {
-          alert(value);
           setLoggedIn(true);
         }
         setValue(value);

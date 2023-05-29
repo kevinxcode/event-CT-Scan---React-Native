@@ -11,15 +11,13 @@ import {
   Keyboard,
   ScrollView,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
 import AuthForm from "./AuthForm";
-import TitleText from "../ui/TitleText";
 
 function AuthContent({ onAuthenticate }) {
-  const navigation = useNavigation();
   const [credentialsInvalid, setCredentialsInvalid] = useState({
     username: false,
     password: false,
@@ -85,7 +83,6 @@ function AuthContent({ onAuthenticate }) {
               <Text style={styles.headerText}>CITRA TUBINDO TBK</Text>
             </View>
           </View>
-          
           <ScrollView style={styles.scrollMenu}>
             <View style={styles.titleContent}>
               <Text style={styles.textContent1}>Proceed with your</Text>
@@ -138,7 +135,7 @@ const styles = StyleSheet.create({
     color: "#0001C0",
   },
   scrollMenu: {
-    paddingTop: deviceHeight < 710 ? 25 : 80,
+    paddingTop: deviceHeight < 710 ? 30 : 80,
   },
   logoImage: {
     width: "100%",
