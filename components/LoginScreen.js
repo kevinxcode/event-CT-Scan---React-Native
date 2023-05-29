@@ -6,7 +6,8 @@ import LoadingOverlay from "../tools/ui/LoadingOverlay";
 export default function LoginScreen({ navigation }) {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
-  const APIURL = `https://hrd.citratubindo.com/ldap/login/zimbra_native`;
+  const APIURL = `https://api.fadeintech.com/api/reactlogin`;
+  // const APIURL = `https://hrd.citratubindo.com/ldap/login/zimbra_native`;
   const authenticate = ({ username, password }) => {
     setIsAuthenticating(true);
     fetch(APIURL, {

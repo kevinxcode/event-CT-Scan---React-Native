@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./components/HomeScreen";
 import LoginScreen from "./components/LoginScreen";
 import ListScreen from "./components/ListScreen";
@@ -10,7 +11,7 @@ import ScanScreen from "./components/Scanner";
 import ResultScreen from "./components/ResultScreen";
 import AnimatedSplash from "react-native-animated-splash-screen";
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 function AuthStack() {
   return (
