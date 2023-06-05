@@ -138,13 +138,14 @@ def reactNativeArchitectures() {
 
 android {
     ndkVersion rootProject.ext.ndkVersion
+
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
         applicationId 'com.kevinalnizar.eventscan'
         minSdkVersion 23
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        multiDexEnabled true
+        targetSdkVersion 33
+        compileSdkVersion 33
         versionCode 1
         versionName "1.0.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
@@ -208,7 +209,6 @@ android {
             }
         }
     }
-
     splits {
         abi {
             reset()
@@ -226,12 +226,13 @@ android {
                 keyPassword MYAPP_UPLOAD_KEY_PASSWORD
             }
         }
-        debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-        }
+        // debug {
+        //     storeFile file('debug.keystore')
+        //     storePassword 'android'
+        //     keyAlias 'androiddebugkey'
+        //     keyPassword 'android'
+        // }
+        
     }
     buildTypes {
         debug {
