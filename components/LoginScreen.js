@@ -2,7 +2,6 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthContent from "../tools/auth/AuthContent";
 import LoadingOverlay from "../tools/ui/LoadingOverlay";
-import { useNavigation } from "@react-navigation/native";
 
 export default function LoginScreen({ navigation }) {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
@@ -21,7 +20,6 @@ export default function LoginScreen({ navigation }) {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        alert(responseJson);
         if (responseJson.loginCodes == "error") {
           alert(responseJson.details);
         } else {
