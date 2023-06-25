@@ -11,6 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
     "updates": {
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/11254c07-e47b-4207-99f5-6deeb06708aa"
@@ -30,7 +33,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.kevinalnizar.eventscan",
-      "runtimeVersion": "48.0.0"
+      "runtimeVersion": "1.0.0"
     },
     "web": {
       "favicon": "./assets/favicon.png"
