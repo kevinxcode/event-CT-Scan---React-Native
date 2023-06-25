@@ -30,7 +30,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.kevinalnizar.eventscan",
-      "runtimeVersion": "1.0.0"
+      "runtimeVersion": "48.0.0"
     },
     "web": {
       "favicon": "./assets/favicon.png"
