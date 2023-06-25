@@ -13,15 +13,11 @@
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.8",
     "@react-navigation/stack": "^6.3.16",
-    "expo": "~47.0.14",
+    "expo": "^48.0.19",
     "expo-barcode-scanner": "~12.1.0",
     "expo-dev-client": "~2.0.1",
     "expo-modules-core": "~1.0.4 || ~1.1.1",
-<<<<<<< HEAD
-    "expo-splash-screen": "~0.14.1",
-=======
     "expo-splash-screen": "~0.17.5",
->>>>>>> 88ae5a62008dcc1e7151d689bab935979221a9d9
     "expo-status-bar": "~1.4.2",
     "expo-updates": "~0.15.6",
     "react": "18.1.0",
@@ -33,7 +29,7 @@
     "react-native-screens": "~3.18.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.20.0"
   },
   "private": true,
   "main": "index.js",

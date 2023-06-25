@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text, FlatList, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, FlatList, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 
 export default function ResultScreen({route}){
@@ -59,13 +59,18 @@ export default function ResultScreen({route}){
         </View>
          
         {isLoading ? (
+          
             <View style={{width: '100%', justifyContent: 'center', alignItems: 'center'}}>
                  <Text >{data.nik} - {data.name}</Text>
                  <Text >{data.tanggal} - {data.waktu}</Text>
             </View>
            
+           
         ) : (
-            <Text style={{fontWeight: 'bold', fontSize: 20, color: 'red'}}>{dataTitle.msgCode}</Text>
+          <View>
+          <ActivityIndicator />
+            <Text style={{fontWeight: 'bold', fontSize: 20, color: 'red', marginTop: 10}}>{dataTitle.msgCode}</Text>
+          </View>
         )}
 
         <Text style={{marginTop: 10}}>{chkCon}</Text>
